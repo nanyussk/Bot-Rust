@@ -6,7 +6,7 @@ edition = "2024"
 [dependencies]
 dotenv = "0.15.0"
 poise = "0.6.1"
-serenity = "0.12.5"
+serenity = { git = "https://github.com/serenity-rs/serenity", branch = "next" }
 sysinfo = "0.38.4"
 tokio = {version = "1.51.1", features = ["macros", "rt-multi-thread"]}
 tracing = "0.1.44"
