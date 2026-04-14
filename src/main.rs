@@ -1,25 +1,23 @@
-use poise::serenity_prelude as serenity;
-use dotenv::dotenv;
-use std::env;
-
 mod commands;
+mod config;
+
+use poise::serenity_prelude as serenity;
+use serenity::prelude::GatewayIntents;
+use crate::config::ConfigEnv;
 
 type Error = Box<dyn std::error::Error + Send + Sync>;
 
 #[tokio::main]
 async fn main() {
-    dotenv().ok();
 
-    let token = env::var("BOT_TOKEN").expect("Token não encontrado");
-    let prefix = env::var("PREFIX").expect("Prefixo não encontrado");
-
-    let intents = serenity::GatewayIntents::all();
+    let config: ConfigEnv = ConfigEnv::load();
+    let intents: GatewayIntents = serenity::GatewayIntents::all();
 
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
             commands: commands::get_commands(),
             prefix_options: poise::PrefixFrameworkOptions {
-                prefix: Some(prefix.into()),
+                prefix: Some(config.prefix.into()),
                 ..Default::default()
             },
             ..Default::default()
@@ -32,7 +30,7 @@ async fn main() {
         })
         .build();
 
-    let mut client = serenity::Client::builder(token, intents)
+    let mut client = serenity::Client::builder(config.token, intents)
         .framework(framework)
         .await
         .unwrap();

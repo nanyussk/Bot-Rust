@@ -4,18 +4,16 @@ use sysinfo::{Pid, ProcessesToUpdate, System};
 type Error = Box<dyn std::error::Error + Send + Sync>;
 type Context<'a> = poise::Context<'a, (), Error>;
 
-
-
 ///Sincronizar os comandos do bot.
 #[poise::command(
     slash_command,
 )]
 pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
 
-    let start = Instant::now();
+    let start: Instant = Instant::now();
 
-    let mut system = System::new();
-    let pid = Pid::from_u32(std::process::id());
+    let mut system: System = System::new();
+    let pid: Pid = Pid::from_u32(std::process::id());
 
     system.refresh_processes(ProcessesToUpdate::Some(&[pid]), true);
 
@@ -28,7 +26,7 @@ pub async fn ping(ctx: Context<'_>) -> Result<(), Error> {
         (0.0, 0.0)
     };
 
-    let latency = start.elapsed().as_millis();
+    let latency: u128 = start.elapsed().as_millis();
 
     ctx.say(format!(
         "🏓 **Pong!**\n\
