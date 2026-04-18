@@ -1,9 +1,9 @@
-use std::env;
 use dotenv::dotenv;
 
+#[derive(Clone)]
 pub struct ConfigEnv {
     pub token: String,
-    pub prefix: String
+    pub prefix: String,
 }
 
 impl ConfigEnv {
@@ -11,8 +11,10 @@ impl ConfigEnv {
         dotenv().ok();
 
         Self {
-            token: env::var("TOKEN").expect("Token do bot não encontrado"),
-            prefix: env::var("PREFIX").expect("Prefixo do bot não encontrado")
+            token: std::env::var("DISCORD_TOKEN")
+                .expect("DISCORD_TOKEN não encontrado"),
+            prefix: std::env::var("PREFIX")
+                .unwrap_or_else(|_| "!".into()),
         }
     }
 }

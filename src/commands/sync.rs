@@ -1,5 +1,4 @@
-type Error = Box<dyn std::error::Error + Send + Sync>;
-type Context<'a> = poise::Context<'a, (), Error>;
+use crate::state::{Context, Error};
 
 #[poise::command(prefix_command, owners_only)]
 pub async fn sync(ctx: Context<'_>) -> Result<(), Error> {

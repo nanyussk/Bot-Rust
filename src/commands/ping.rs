@@ -1,8 +1,7 @@
 use std::time::Instant;
 use sysinfo::{Pid, ProcessesToUpdate, System};
 
-type Error = Box<dyn std::error::Error + Send + Sync>;
-type Context<'a> = poise::Context<'a, (), Error>;
+use crate::state::{Context, Error};
 
 ///Sincronizar os comandos do bot.
 #[poise::command(

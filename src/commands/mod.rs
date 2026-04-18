@@ -1,11 +1,9 @@
 pub mod ping;
 pub mod sync;
 
-use poise::Command;
+use crate::state::{Data, Error};
 
-use crate::{Error};
-
-pub fn get_commands() -> Vec<Command<(), Error>> {
+pub fn get_commands() -> Vec<poise::Command<Data, Error>> {
     vec![
         ping::ping(),
         sync::sync(),
