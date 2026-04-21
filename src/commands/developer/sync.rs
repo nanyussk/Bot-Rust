@@ -1,4 +1,4 @@
-use crate::state::{Context, Error};
+use crate::core::{Context, Error};
 
 #[poise::command(prefix_command, owners_only)]
 pub async fn sync(ctx: Context<'_>) -> Result<(), Error> {

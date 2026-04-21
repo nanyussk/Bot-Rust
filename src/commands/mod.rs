@@ -1,11 +1,12 @@
-pub mod ping;
-pub mod sync;
+pub mod general;
+pub mod developer;
 
-use crate::state::{Data, Error};
+use crate::core::{Data, Error};
 
 pub fn get_commands() -> Vec<poise::Command<Data, Error>> {
     vec![
-        ping::ping(),
-        sync::sync(),
+        general::ping::ping(),
+        general::botinfo::botinfo(),
+        developer::sync::sync(),
     ]
 }

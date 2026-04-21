@@ -1,8 +1,10 @@
-use crate::config::ConfigEnv;
+use super::config::ConfigEnv;
 
 pub struct Data {
     #[allow(dead_code)]
-    pub config: ConfigEnv
+    pub config: ConfigEnv,
+    #[allow(dead_code)]
+    pub http: reqwest::Client
 }
 
 pub type Error = Box<dyn std::error::Error + Send + Sync>;
