@@ -7,7 +7,7 @@ use super::state::{Data, Error};
 pub fn build(config: ConfigEnv) -> poise::Framework<Data, Error> {
     poise::Framework::builder()
         .options(poise::FrameworkOptions {
-            commands: commands::get_commands(),
+            commands: commands::build_commands(),
 
             prefix_options: poise::PrefixFrameworkOptions {
                 prefix: Some(config.prefix.clone()),
